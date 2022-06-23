@@ -1,4 +1,4 @@
 
-# My Solution to LeetCode
+# My solution to LeetCode
 
-My Solution to LeetCode
+My solution to LeetCode

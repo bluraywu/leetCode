@@ -2,19 +2,19 @@ import java.util.*;
 
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<String, List<String>> tmpMap = new HashMap<>();
-        for(int i=0;i<strs.length;i++){
-            char[] charKey = strs[i].toCharArray();
-            Arrays.sort(charKey);
-            String key=new String(charKey);
-            if(tmpMap.containsKey(key)){
-                tmpMap.get(key).add(strs[i]);
-            }else{
-                ArrayList<String> tmpArrayList = new ArrayList<>();
-                tmpArrayList.add(strs[i]);
-                tmpMap.put(key,tmpArrayList);
-            }
+        Map<String, List<String>> anagramsGroups = new HashMap<>();
+        for (String str : strs) {
+            char[] charStr = str.toCharArray();
+            Arrays.sort(charStr);
+            String anagramKey = String.valueOf(charStr);
+            anagramsGroups.putIfAbsent(anagramKey,new ArrayList<>());
+            anagramsGroups.get(anagramKey).add(str);
+//            if (anagramsGroups.containsKey(anagramKey)) {
+//                anagramsGroups.get(anagramKey).add(str);
+//            }else{
+//                anagramsGroups.put(anagramKey, new ArrayList<>(){{add(str);}});
+//            }
         }
-        return new ArrayList<List<String>>(tmpMap.values());
+        return new ArrayList<>(anagramsGroups.values());
     }
 }

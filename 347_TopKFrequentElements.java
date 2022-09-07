@@ -29,4 +29,27 @@ class Solution {
         int[] arr = result.stream().mapToInt(i -> i).toArray();
         return arr;
     }
+    /**
+     * Time Complexity: O(nlog(k))
+     * Space Complexity: O(n)
+     */
+    public int[] topKFrequent2(int[] nums, int k) {
+        int[] arr = new int[k];
+        HashMap<Integer, Integer> frequency = new HashMap<>();
+        for (int num : nums){
+            frequency.put(num, frequency.getOrDefault(num, 0) + 1);
+        }
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(
+                Comparator.comparingInt(Map.Entry::getValue)
+        );
+        for (Map.Entry<Integer, Integer> it : frequency.entrySet()) {
+            pq.add(it);
+            if (pq.size() > k) pq.poll();
+        }
+        int i = k;
+        while (!pq.isEmpty()) {
+            arr[--i] = pq.poll().getKey();
+        }
+        return arr;
+    }
 }
